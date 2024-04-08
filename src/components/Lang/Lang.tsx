@@ -1,27 +1,39 @@
+import flagArm from '../../assets/flags/armenia.svg'
+import flagEng from '../../assets/flags/united-states-of-america.svg'
+import flagRus from '../../assets/flags/russia.svg'
+
+
 const Lang = () => {
     const langs = [
         {
             id: 1,
             title: "Am",
-            flag: ""
+            flag: flagArm,
+            alt:"Flag of Armenia"
         },
 
         {
             id: 2,
             title: "En",
-            flag: ""
+            flag: flagEng,
+            alt:"Flag of United States"
         },
 
         {
             id: 3,
             title: "Ru",
-            flag: ""
+            flag: flagRus,
+            alt:"Flag of Russia"
         }
     ];
     return (
-        <div className='langs w-[95%] flex justify-end items-end gap-3'>
+        <div className='langs w-[95%] flex justify-end items-end gap-4 cursor-pointer'>
             {
-                langs.map(lang => <span key={lang.id}>{lang.title}</span>)
+                langs.map(lang => 
+                <div className="langs h-10 flex justify-center items-center gap-1">
+                    <img className='w-7 h-7' src={lang.flag} alt={lang.alt} />
+                    <span key={lang.id}>{lang.title}</span>
+                </div>)
             }
         </div>
     );
