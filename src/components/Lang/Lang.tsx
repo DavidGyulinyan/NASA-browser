@@ -4,36 +4,36 @@ import flagRus from '../../assets/flags/russia.svg'
 
 
 const Lang = () => {
-    const langs = [
+    const langs: { id: number, title: string, flag: string, alt: string }[] = [
         {
             id: 1,
             title: "Am",
             flag: flagArm,
-            alt:"Flag of Armenia"
+            alt: "Flag of Armenia"
         },
 
         {
             id: 2,
             title: "En",
             flag: flagEng,
-            alt:"Flag of United States"
+            alt: "Flag of United States"
         },
 
         {
             id: 3,
             title: "Ru",
             flag: flagRus,
-            alt:"Flag of Russia"
+            alt: "Flag of Russia"
         }
     ];
     return (
-        <div className='langs w-[95%] flex justify-end items-end gap-4 cursor-pointer'>
+        <div className='langs w-[95%] max-lg:w-full flex justify-end items-end max-lg:justify-center max-lg:items-center gap-4 cursor-pointer'>
             {
-                langs.map(lang => 
-                <div className="langs h-10 flex justify-center items-center gap-1">
-                    <img className='w-7 h-7' src={lang.flag} alt={lang.alt} />
-                    <span key={lang.id}>{lang.title}</span>
-                </div>)
+                langs.map(lang =>
+                    <div className="langs h-10 flex justify-center items-center gap-1" key={lang.id}>
+                        <img className='w-7 h-7' src={lang.flag} alt={lang.alt} />
+                        <span>{lang.title}</span>
+                    </div>)
             }
         </div>
     );
