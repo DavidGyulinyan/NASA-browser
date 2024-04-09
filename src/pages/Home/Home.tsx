@@ -1,9 +1,13 @@
+import Content from "../../components/Content/Content";
+
 const Home = () => {
     return (
-        <div>
-            Home
+        <>
+        <div className="w-full h-[43rem]">
+            <Content/>
         </div>
+        </>
     )
 }
 
-export default Home
+export default Home;

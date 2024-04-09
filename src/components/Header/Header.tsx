@@ -1,7 +1,7 @@
-import nasaLogo from '../../assets/nasa_logo.svg'
-import Nav from '../NavBar/NavBar'
-import Lang from "../Lang/Lang"
-import { Link } from 'react-router-dom'
+import nasaLogo from '../../assets/nasa_logo.svg';
+import Nav from '../NavBar/NavBar';
+import Lang from "../Lang/Lang";
+import { Link } from 'react-router-dom';
 
 const Header = () => {
     return (
@@ -18,4 +18,4 @@ const Header = () => {
     )
 }
 
-export default Header
+export default Header;

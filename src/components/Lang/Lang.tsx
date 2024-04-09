@@ -1,6 +1,6 @@
-import flagArm from '../../assets/flags/armenia.svg'
-import flagEng from '../../assets/flags/united-states-of-america.svg'
-import flagRus from '../../assets/flags/russia.svg'
+import flagArm from '../../assets/flags/armenia.svg';
+import flagEng from '../../assets/flags/united-states-of-america.svg';
+import flagRus from '../../assets/flags/russia.svg';
 
 
 const Lang = () => {
@@ -26,6 +26,7 @@ const Lang = () => {
             alt: "Flag of Russia"
         }
     ];
+
     return (
         <div className='langs w-[95%] max-lg:w-full flex justify-end items-end max-lg:justify-center max-lg:items-center gap-4 cursor-pointer'>
             {

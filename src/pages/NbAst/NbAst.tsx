@@ -6,4 +6,4 @@ const NbAst = () => {
     )
 }
 
-export default NbAst
+export default NbAst;

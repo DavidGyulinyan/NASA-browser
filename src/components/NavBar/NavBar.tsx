@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom"
+import { Link } from "react-router-dom";
 
 const NavBar = () => {
     const navItems: { id: number, title: string, path: string }[] = [
@@ -36,4 +36,4 @@ const NavBar = () => {
     )
 }
 
-export default NavBar
+export default NavBar;

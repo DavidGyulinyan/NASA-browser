@@ -6,4 +6,4 @@ const NewPlanet = () => {
     )
 }
 
-export default NewPlanet
+export default NewPlanet;
