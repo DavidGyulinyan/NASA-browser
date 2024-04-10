@@ -1,47 +1,60 @@
 import { useEffect, useState } from "react";
-import { podDataFetch } from "../../APIs/helpers/requests";
+import { podData } from "../../APIs/podAPI";
 
 const Pod = () => {
 
-    const [date, setDate] = useState<string>('');
+    const [currentDate, setCurrentDate] = useState<string>('');
+    const [selectedDate, setSelectedDate] = useState<string>('');
     const [photo, setPhoto] = useState<string>('');
+    const [description, setDescription] = useState('');
 
     useEffect(() => {
         const today = new Date();
-        const formattedDate = `${(today.getDate()).toString().padStart(2, '0')}/${(today.getMonth() + 1).toString().padStart(2, '0')}/${today.getFullYear().toString().padStart(2, '0')}`;
-        setDate(formattedDate);
-    }, []);
-
-
-    useEffect(() => {
+        const formattedDate = `${today.getFullYear().toString().padStart(2, '0')}-${(today.getMonth() + 1).toString().padStart(2, '0')}-${(today.getDate()).toString().padStart(2, '0')}`;
+        setCurrentDate(formattedDate);
+        
         async function fetchData() {
-            const photoOfTheDay = await podDataFetch();
+            const photoOfTheDay = (await podData({selectedDate, currentDate})).data;
+            const descriptionOfPhoto = await (await podData({selectedDate, currentDate})).title
             setPhoto(photoOfTheDay);
+            setDescription(descriptionOfPhoto)
         }
         fetchData();
-    }, []);
+    }, [currentDate, selectedDate]);
+
+    
+    
+    const handleDateChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setSelectedDate(event.target.value);
+    };
 
 
     return (
         <>
-            <div className="w-full flex flex-col justify-center px-2 py-10">
-                <form className="flex flex-col items-center">
+            <div className="w-full flex flex-col justify-center items-center px-2 py-10">
+                <form className="w-60 text-center flex flex-col items-center gap-3">
+                    <label htmlFor="pod">Insert the date։ photo of the day</label>
                     <input
-                        defaultValue={date}
-                        type="text"
+                        id="pod"
+                        defaultValue={currentDate}
+                        max={currentDate}
+                        type="date"
+                        onChange={handleDateChange}
                         placeholder="Enter your search query"
-                        className="border border-gray-300 rounded px-4 py-2 focus:outline-none focus:border-blue-800"
+                        className="w-full border border-gray-300 rounded px-4 py-2 focus:outline-none focus:border-blue-800"
                     />
-                    <button className="bg-blue-500 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded mt-2">
-                        Search
-                    </button>
                 </form>
 
             </div>
 
-            <div className="w-full flex justify-center items-center">
-                <img src={photo} alt="Astronomy of the day" />
-            </div>
+            {
+                <div className="w-full flex flex-col justify-center items-center gap-2 py-3">
+                    <span className="text-2xl">{description}</span>
+                    <img className="h-[58rem]" src={photo} alt="Astronomy photo of the day" />
+                </div>
+
+            }
+
         </>
     )
 }
