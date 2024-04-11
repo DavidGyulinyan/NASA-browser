@@ -8,10 +8,12 @@ interface apodDataProps {
 export const apodData = async ({selectedDate, currentDate}: apodDataProps) => {
     try {
 
-        const {data} = await axios.get(`https://api.nasa.gov/planetary/apod?date=${selectedDate || currentDate}&thumbs=false&api_key=DetxjfUBvwdhUow1iSLC471HjXISTbB3auhJdgY2`);        
+        const {data} = await axios.get(`https://api.nasa.gov/planetary/apod?date=${selectedDate || currentDate}&thumbs=false&api_key=DetxjfUBvwdhUow1iSLC471HjXISTbB3auhJdgY2`);
+                
         return {
             data: data.url,
-            title: data.title
+            title: data.title,
+            explanation: data.explanation
         };
     } catch (error) {
         console.error('Error fetching data:', error);

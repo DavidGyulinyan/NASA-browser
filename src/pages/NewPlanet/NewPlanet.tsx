@@ -39,7 +39,7 @@ const MyComponent: React.FC = () => {
     };
 
     return (
-        <div className="w-full max-w-md mx-auto">
+        <div className="w-full max-w-md mx-auto pt-14">
             <Formik
                 initialValues={initialValues}
                 validationSchema={validationSchema}
