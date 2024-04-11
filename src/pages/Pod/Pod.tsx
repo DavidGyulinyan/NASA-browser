@@ -9,13 +9,14 @@ const Pod = () => {
     const [description, setDescription] = useState('');
 
     useEffect(() => {
-        const today = new Date();
-        const formattedDate = `${today.getFullYear().toString().padStart(2, '0')}-${(today.getMonth() + 1).toString().padStart(2, '0')}-${(today.getDate()).toString().padStart(2, '0')}`;
+        const date = new Date();
+        const formattedDate = `${date.getFullYear().toString().padStart(2, '0')}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${(date.getDate()).toString().padStart(2, '0')}`;
         setCurrentDate(formattedDate);
         
         async function fetchData() {
-            const photoOfTheDay = (await podData({selectedDate, currentDate})).data;
-            const descriptionOfPhoto = await (await podData({selectedDate, currentDate})).title
+            const podRes = await podData({selectedDate, currentDate})
+            const photoOfTheDay = await podRes.data;
+            const descriptionOfPhoto = await podRes.title
             setPhoto(photoOfTheDay);
             setDescription(descriptionOfPhoto)
         }
@@ -25,6 +26,7 @@ const Pod = () => {
     
     
     const handleDateChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        event.preventDefault();
         setSelectedDate(event.target.value);
     };
 
@@ -47,10 +49,15 @@ const Pod = () => {
 
             </div>
 
-            {
+            {photo 
+            ?
                 <div className="w-full flex flex-col justify-center items-center gap-2 py-3">
                     <span className="text-2xl">{description}</span>
                     <img className="h-[58rem]" src={photo} alt="Astronomy photo of the day" />
+                </div>
+                :
+                <div className="w-full flex flex-col justify-center items-center gap-2 py-3">
+                    <span className="text-2xl text-red-600 text-center">Wait for data <br />or check your network connection</span>
                 </div>
 
             }
