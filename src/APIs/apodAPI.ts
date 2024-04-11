@@ -1,11 +1,11 @@
 import axios from 'axios';
 
-interface podDataProps {
+interface apodDataProps {
     selectedDate: string, 
     currentDate: string
 }
 
-export const podData = async ({selectedDate, currentDate}: podDataProps) => {
+export const apodData = async ({selectedDate, currentDate}: apodDataProps) => {
     try {
 
         const {data} = await axios.get(`https://api.nasa.gov/planetary/apod?date=${selectedDate || currentDate}&thumbs=false&api_key=DetxjfUBvwdhUow1iSLC471HjXISTbB3auhJdgY2`);        

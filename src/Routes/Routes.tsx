@@ -3,7 +3,7 @@ import App from "../App";
 import Home from '../pages/Home/Home';
 import NbAst from "../pages/NbAst/NbAst";
 import NewPlanet from "../pages/NewPlanet/NewPlanet";
-import Pod from "../pages/Pod/Pod";
+import Apod from "../pages/Apod/Apod";
 
 export const router = createBrowserRouter([
     {
@@ -16,7 +16,7 @@ export const router = createBrowserRouter([
             },
             {
                 path: "astronomy_photo_of_the_day",
-                element: <Pod />
+                element: <Apod />
             },
             {
                 path: "near_by_asteroids",
