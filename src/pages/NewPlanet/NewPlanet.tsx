@@ -2,20 +2,49 @@ import React from 'react';
 import { Formik, Form, Field, ErrorMessage, FormikHelpers } from 'formik';
 import * as Yup from 'yup';
 import { FormData } from '../../Models/NewPlanetTypeModel';
+import { useTranslation } from 'react-i18next';
+import { NewPlanetTypes } from '../../Models/NewPlanetType';
 
-const validationSchema = Yup.object().shape({
-    planetName: Yup.string().min(5, 'Planet name must be at least 5 characters').required('Planet name is required'),
-    galaxyName: Yup.string().oneOf(
-        ['Milky Way', 'Messier 83', 'Andromeda', 'Sombrero', 'Pinwheel', 'Tadpole', 'Somewhere else...'],
-        'Invalid galaxy name'
-    ).required('Galaxy name is required'),
-    diameter: Yup.number().required('Diameter is required').positive('Diameter must be positive'),
-    distance: Yup.number().required('Distance is required').positive('Distance must be positive'),
-    yourName: Yup.string().required('Your name is required'),
-    email: Yup.string().email('Invalid email address').required('Email is required'),
-});
 
 const NewPlanet: React.FC = () => {
+
+    const { t } = useTranslation();
+    const newPlanetTitles: NewPlanetTypes = {
+        titleKey: "newPlanetTitle",
+        planetName: "newPlanetName",
+        galaxyName: "planetGalaxyName",
+        diameter: "planetDiameter",
+        distance: "planetDistance",
+        yourName: "userName",
+        yourEmail: "userEmail",
+        submitTitle: "submitButton",
+        reqPlanetName: "reqPlanetName",
+        planetNameChar: "planetNameChar",
+        reqGalaxyName: "reqGalaxyName",
+        planetDiameterChar: "planetDiameterChar",
+        reqDiameter: "reqDiameter",
+        reqDistance: "reqDistance",
+        reqUserName: "reqUserName",
+        planetDistanceChar: "planetDistanceChar",
+        reqUserEmail: "reqUserEmail",
+        userEmailChar: "userEmailChar",
+        selectGalaxy: "selectGalaxy",
+        somewhereElse: "somewhereElse",
+    }
+
+    const validationSchema = Yup.object().shape({
+        planetName: Yup.string().min(5, t(newPlanetTitles.planetNameChar)).required(t(newPlanetTitles.reqPlanetName)),
+        galaxyName: Yup.string().oneOf(
+            ['Milky Way', 'Messier 83', 'Andromeda', 'Sombrero', 'Pinwheel', 'Tadpole', 'Somewhere else...'],
+            'Invalid galaxy name'
+        ).required(t(newPlanetTitles.reqPlanetName)),
+        diameter: Yup.number().required(t(newPlanetTitles.planetDiameterChar)).positive(t(newPlanetTitles.reqDiameter)),
+        distance: Yup.number().required(t(newPlanetTitles.planetDistanceChar)).positive(t(newPlanetTitles.reqDistance)),
+        yourName: Yup.string().required(t(newPlanetTitles.reqUserName)),
+        email: Yup.string().email(t(newPlanetTitles.userEmailChar)).required(t(newPlanetTitles.reqUserEmail)),
+    });
+
+
     const initialValues: FormData = {
         planetName: '',
         galaxyName: '',
@@ -33,7 +62,7 @@ const NewPlanet: React.FC = () => {
     return (
         <>
             <div className="w-full max-w-md mx-auto pt-14">
-                <div className='text-center text-xl font-bold mb-4'>If you find a new planet, you can add it to our catalog (reactive forms demo)</div>
+                <div className='text-center text-xl font-bold mb-4'>{t(newPlanetTitles.titleKey)}</div>
                 <Formik
                     initialValues={initialValues}
                     validationSchema={validationSchema}
@@ -43,7 +72,7 @@ const NewPlanet: React.FC = () => {
                         <Form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
                             <div className="mb-4">
                                 <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="planetName">
-                                    Planet Name
+                                    {t(newPlanetTitles.planetName)}
                                 </label>
                                 <Field
                                     className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -55,7 +84,7 @@ const NewPlanet: React.FC = () => {
                             </div>
                             <div className="mb-4">
                                 <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="galaxyName">
-                                    Galaxy Name
+                                    {t(newPlanetTitles.galaxyName)}
                                 </label>
                                 <Field
                                     as="select"
@@ -63,20 +92,20 @@ const NewPlanet: React.FC = () => {
                                     id="galaxyName"
                                     name="galaxyName"
                                 >
-                                    <option value="">Select a galaxy...</option>
+                                    <option value="">{t(newPlanetTitles.selectGalaxy)}</option>
                                     <option value="Milky Way">Milky Way</option>
                                     <option value="Messier 83">Messier 83</option>
                                     <option value="Andromeda">Andromeda</option>
                                     <option value="Sombrero">Sombrero</option>
                                     <option value="Pinwheel">Pinwheel</option>
                                     <option value="Tadpole">Tadpole</option>
-                                    <option value="Somewhere else...">Somewhere else...</option>
+                                    <option value="Somewhere else...">{t(newPlanetTitles.somewhereElse)}</option>
                                 </Field>
                                 <ErrorMessage name="galaxyName" component="div" className="text-red-500 text-xs italic" />
                             </div>
                             <div className="mb-4">
                                 <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="diameter">
-                                    Diameter(km)
+                                    {t(newPlanetTitles.diameter)}
                                 </label>
                                 <Field
                                     className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -88,7 +117,7 @@ const NewPlanet: React.FC = () => {
                             </div>
                             <div className="mb-4">
                                 <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="distance">
-                                    Distance(km)
+                                    {t(newPlanetTitles.distance)}
                                 </label>
                                 <Field
                                     className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -100,7 +129,7 @@ const NewPlanet: React.FC = () => {
                             </div>
                             <div className="mb-4">
                                 <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="yourName">
-                                    Your Name
+                                    {t(newPlanetTitles.yourName)}
                                 </label>
                                 <Field
                                     className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -112,7 +141,7 @@ const NewPlanet: React.FC = () => {
                             </div>
                             <div className="mb-4">
                                 <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
-                                    Email
+                                    {t(newPlanetTitles.yourEmail)}
                                 </label>
                                 <Field
                                     className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -126,7 +155,7 @@ const NewPlanet: React.FC = () => {
                                 className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                                 type="submit"
                             >
-                                Submit
+                                {t(newPlanetTitles.submitTitle)}
                             </button>
                         </Form>
                     )}

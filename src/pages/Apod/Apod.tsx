@@ -1,7 +1,10 @@
 import { useEffect, useState } from "react";
 import { apodData } from "../../APIs/apodAPI";
+import { useTranslation } from "react-i18next";
 
 const Apod = () => {
+    const { t } = useTranslation();
+    const apodTitles = { titleKey: "apod" }
 
     const [currentDate, setCurrentDate] = useState<string>('');
     const [selectedDate, setSelectedDate] = useState<string>('');
@@ -36,7 +39,11 @@ const Apod = () => {
         <>
             <div className="w-full flex flex-col justify-center items-center px-2 py-10">
                 <form className="w-60 text-center flex flex-col items-center gap-3">
-                    <label htmlFor="apod">Insert the date։ photo of the day</label>
+                    <label htmlFor="apod">
+                        {
+                            t(apodTitles.titleKey)
+                        }
+                    </label>
                     <input
                         id="apod"
                         defaultValue={currentDate}

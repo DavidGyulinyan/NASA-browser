@@ -2,19 +2,35 @@ import React, { useEffect, useState } from "react";
 import { NbaData } from "../../APIs/NbaAPI";
 import formattedDate from "../../APIs/helpers/formattedDate";
 import { Asteroid, NearEarthObjects } from "../../Models/AsteroidTypeModel";
+import { useTranslation } from "react-i18next";
+import { NbastType } from "../../Models/NbastType";
 
 const NbAst = () => {
+
+    const { t } = useTranslation();
+    const nbastTitles: NbastType = {
+        titleKey: "nearbastTitle",
+        subTitleKey: "nearbastSubtitle",
+        startDateString: "startDate",
+        endDateString: "endDate",
+        asteroidName: "asteroidName",
+        asteroidDistance: "asteroidDistance",
+        asteroidMagnitude: "asteroidMagnitude",
+        asteroidDiameter: "asteroidDiameter",
+        asteroidHazardness: "asteroidHazardness",
+    }
+
     const [currentDate, setCurrentDate] = useState<string>('');
     const [startDate, setStartDate] = useState<string>('');
     const [endDate, setEndDate] = useState<string>('');
     const [asteroids, setAsteroids] = useState<NearEarthObjects | null>(null);
-    
+
 
     useEffect(() => {
         const date = new Date();
         setCurrentDate(formattedDate(date));
         setStartDate(formattedDate(date));
-        setEndDate(formattedDate(date));        
+        setEndDate(formattedDate(date));
     }, []);
 
     const handleStartDateChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -63,12 +79,20 @@ const NbAst = () => {
         <>
             <div className="mt-20 container mx-auto">
                 <div className="flex flex-col justify-center items-center">
-                    <span className="text-2xl mb-4">Search for Asteroids based on their closest approach date to Earth.</span>
-                    <span className="text-xl mb-4">You could select the range maximum for 7 days</span>
+                    <span className="text-2xl mb-4">
+                        {
+                            t(nbastTitles.titleKey)
+                        }
+                    </span>
+                    <span className="text-xl mb-4">
+                        {
+                            t(nbastTitles.subTitleKey)
+                        }
+                    </span>
                 </div>
 
                 <form className="mb-4 flex justify-center items-center gap-3">
-                    <label className="block mb-2">Start Date:</label>
+                    <label className="block mb-2">{t(nbastTitles.startDateString)}:</label>
                     <input
                         onChange={handleStartDateChange}
                         defaultValue={currentDate}
@@ -78,7 +102,7 @@ const NbAst = () => {
                         name="start-date"
                     />
 
-                    <label className="block mb-2">End Date:</label>
+                    <label className="block mb-2">{t(nbastTitles.endDateString)}:</label>
                     <input
                         onChange={handleEndDateChange}
                         value={endDate}
@@ -93,11 +117,11 @@ const NbAst = () => {
                 <table className="table-auto w-full">
                     <thead>
                         <tr className="bg-gray-200">
-                            <th className="px-4 py-2">Name</th>
-                            <th className="px-4 py-2">Distance (km)</th>
-                            <th className="px-4 py-2">Absolute Magnitude</th>
-                            <th className="px-4 py-2">Diameter (m)</th>
-                            <th className="px-4 py-2">Potential Hazardous</th>
+                            <th className="px-4 py-2">{t(nbastTitles.asteroidName)}</th>
+                            <th className="px-4 py-2">{t(nbastTitles.asteroidDistance)}</th>
+                            <th className="px-4 py-2">{t(nbastTitles.asteroidMagnitude)}</th>
+                            <th className="px-4 py-2">{t(nbastTitles.asteroidDiameter)}</th>
+                            <th className="px-4 py-2">{t(nbastTitles.asteroidHazardness)}</th>
                         </tr>
                     </thead>
                     <tbody>
