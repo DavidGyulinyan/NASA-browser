@@ -3,6 +3,7 @@ export interface NbastType {
     subTitleKey: string, 
     startDateString: string, 
     endDateString: string,
+    nearbastSubtitle:string,
     asteroidName: string,
     asteroidDistance: string,
     asteroidMagnitude: string,

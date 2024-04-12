@@ -71,7 +71,7 @@ const Apod = () => {
                 </div>
                 :
                 <div className="w-full flex flex-col justify-center items-center gap-2 py-3">
-                    <span className="text-2xl text-red-600 text-center">Wait for data <br />or check your network connection</span>
+                    <span className="text-2xl text-red-600 text-center">Wait for data or check your network connection</span>
                 </div>
 
             }

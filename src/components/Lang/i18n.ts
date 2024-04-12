@@ -54,7 +54,7 @@ i18n
                     planetDistanceChar: "Հեռավորությունը դաշտը պարտադիր է",
                     reqUserName: "Ձեր անունը դաշտը պարտադիր է",
                     reqUserEmail: "Էլ․ Հասցե դաշտը պարտադիր է",
-                    selectGalaxy: "Ընտրեք գալակտիկա...",
+                    selectGalaxy: "Ընտրեք գալակտիկան...",
                     somewhereElse: "Մեկ այլ տեղ..."
                 },
             },
@@ -114,7 +114,7 @@ i18n
                     asteroidDiameter: "Диаметр(м)",
                     asteroidHazardness: "Потенциально опасный",
 
-                    newplanet: "Отправить новую планету",
+                    newplanet: "Представить новую планету",
                     newPlanetTitle: "Если вы найдете новую планету, вы можете добавить ее в наш каталог",
                     newPlanetName: "Название планеты",
                     planetGalaxyName: "Название галактики",

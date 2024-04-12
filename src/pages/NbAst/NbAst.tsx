@@ -13,6 +13,7 @@ const NbAst = () => {
         subTitleKey: "nearbastSubtitle",
         startDateString: "startDate",
         endDateString: "endDate",
+        nearbastSubtitle:"nearbastSubtitle",
         asteroidName: "asteroidName",
         asteroidDistance: "asteroidDistance",
         asteroidMagnitude: "asteroidMagnitude",
@@ -48,7 +49,7 @@ const NbAst = () => {
         if (selectedDate <= maxEndDate) {
             setEndDate(selectedDate);
         } else {
-            alert("Please select a date within 7 days from the start date.");
+            alert(t(nbastTitles.nearbastSubtitle));
         }
     };
 
@@ -114,7 +115,7 @@ const NbAst = () => {
                     />
                 </form>
 
-                <table className="table-auto w-full">
+                <table className={`table-auto w-full ${!asteroids ? "flex flex-col justify-center items-center" : ""}`}>
                     <thead>
                         <tr className="bg-gray-200">
                             <th className="px-4 py-2">{t(nbastTitles.asteroidName)}</th>
@@ -124,24 +125,30 @@ const NbAst = () => {
                             <th className="px-4 py-2">{t(nbastTitles.asteroidHazardness)}</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        {asteroids &&
-                            Object.keys(asteroids).map((date: string) =>
-                                asteroids[date].map((asteroid: Asteroid) => (
-                                    <tr key={asteroid.id}>
-                                        <td className="border px-4 py-2 text-center">{asteroid.name}</td>
-                                        <td className="border px-4 py-2 text-center">{asteroid.close_approach_data[0].miss_distance.kilometers}</td>
-                                        <td className="border px-4 py-2 text-center">{asteroid.absolute_magnitude_h}</td>
-                                        <td className="border px-4 py-2 text-center">
-                                            {asteroid.estimated_diameter.kilometers.estimated_diameter_min.toFixed(2)} -{" "}
-                                            {asteroid.estimated_diameter.kilometers.estimated_diameter_max.toFixed(2)}
-                                        </td>
-                                        <td className="border px-4 py-2 text-center">{asteroid.is_potentially_hazardous_asteroid ? "Yes" : "No"}</td>
-                                    </tr>
-                                ))
-                            )
-                        }
-                    </tbody>
+                    {asteroids
+                        ? <tbody>
+                            {asteroids &&
+                                Object.keys(asteroids).map((date: string) =>
+                                    asteroids[date].map((asteroid: Asteroid) => (
+                                        <tr key={asteroid.id}>
+                                            <td className="border px-4 py-2 text-center">{asteroid.name}</td>
+                                            <td className="border px-4 py-2 text-center">{asteroid.close_approach_data[0].miss_distance.kilometers}</td>
+                                            <td className="border px-4 py-2 text-center">{asteroid.absolute_magnitude_h}</td>
+                                            <td className="border px-4 py-2 text-center">
+                                                {asteroid.estimated_diameter.kilometers.estimated_diameter_min.toFixed(2)} -{" "}
+                                                {asteroid.estimated_diameter.kilometers.estimated_diameter_max.toFixed(2)}
+                                            </td>
+                                            <td className="border px-4 py-2 text-center">{asteroid.is_potentially_hazardous_asteroid ? "Yes" : "No"}</td>
+                                        </tr>
+                                    ))
+                                )
+                            }
+                        </tbody>
+                        :
+                        <tbody className="w-full py-3 flex justify-center items-center">
+                            <span className="text-2xl text-red-600 text-center">Wait for data or check your network connection</span>
+                        </tbody>
+                    }
                 </table>
             </div>
         </>
