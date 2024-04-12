@@ -1,6 +1,7 @@
 import React from 'react';
 import { Formik, Form, Field, ErrorMessage, FormikHelpers } from 'formik';
 import * as Yup from 'yup';
+import { FormData } from '../../Models/NewPlanetTypeModel';
 
 const validationSchema = Yup.object().shape({
     planetName: Yup.string().min(5, 'Planet name must be at least 5 characters').required('Planet name is required'),
@@ -13,15 +14,6 @@ const validationSchema = Yup.object().shape({
     yourName: Yup.string().required('Your name is required'),
     email: Yup.string().email('Invalid email address').required('Email is required'),
 });
-
-interface FormData {
-    planetName: string;
-    galaxyName: string;
-    diameter: number;
-    distance: number;
-    yourName: string;
-    email: string;
-}
 
 const NewPlanet: React.FC = () => {
     const initialValues: FormData = {

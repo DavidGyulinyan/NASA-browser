@@ -1,9 +1,5 @@
 import axios from 'axios';
-
-interface NbaDataProps {
-    endDate: string, 
-    startDate: string
-}
+import { NbaDataProps } from '../Models/NbAstTypeModel';
 
 export const NbaData = async ({startDate, endDate}: NbaDataProps) => {
     try {

@@ -10,6 +10,7 @@ const Apod = () => {
     const [explonation, setExplanation] = useState('');
 
     useEffect(() => {
+
         const date = new Date();
         const formattedDate = `${date.getFullYear().toString().padStart(2, '0')}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${(date.getDate()).toString().padStart(2, '0')}`;
         setCurrentDate(formattedDate);
@@ -26,13 +27,10 @@ const Apod = () => {
         fetchData();
     }, [currentDate, explonation, selectedDate]);
 
-
-
     const handleDateChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         event.preventDefault();
         setSelectedDate(event.target.value);
     };
-
 
     return (
         <>
@@ -48,7 +46,6 @@ const Apod = () => {
                         className="w-full border border-gray-300 rounded px-4 py-2 focus:outline-none focus:border-blue-800"
                     />
                 </form>
-
             </div>
 
             {photo

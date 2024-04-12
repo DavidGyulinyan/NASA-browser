@@ -1,10 +1,11 @@
 import flagArm from '../../assets/flags/armenia.svg';
 import flagEng from '../../assets/flags/united-states-of-america.svg';
 import flagRus from '../../assets/flags/russia.svg';
+import { LangProps } from '../../Models/LangPropsTypes';
 
 
 const Lang = () => {
-    const langs: { id: number, title: string, flag: string, alt: string }[] = [
+    const langs: LangProps[] = [
         {
             id: 1,
             title: "Am",
