@@ -1,37 +1,36 @@
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const NavBar = () => {
-    const navItems: { id: number, title: string, path: string }[] = [
+    const { t } = useTranslation();
+
+    const navItems: { id: number, titleKey: string, path: string }[] = [
         {
             id: 1,
-            title: "Astronomy photo of the day",
+            titleKey: "apod",
             path: "astronomy_photo_of_the_day"
         },
         {
             id: 2,
-            title: "Nearby Asteroids",
+            titleKey: "nearbast",
             path: "near_by_asteroids"
         },
         {
             id: 3,
-            title: "Submit New Planet",
+            titleKey: "newplanet",
             path: "new_planets"
         },
-    ]
+    ];
+
     return (
         <nav className="w-full h-20 mt-3 flex justify-around items-center gap-5 max-lg:flex-wrap bg-blue-800">
-            {
-                navItems.map(item =>
-                    <div className="text-white text-center font-bold text-3xl max-xl:text-xl cursor-pointer" key={item.id}>
-                        <Link to={item.path}> 
-                        {
-                            item.title
-                        }
-                        </Link> 
-                    </div>
-                    )
-            }
-
+            {navItems.map(item =>
+                <div className="text-white text-center font-bold text-3xl max-xl:text-xl cursor-pointer" key={item.id}>
+                    <Link to={item.path}>
+                        {t(item.titleKey)}
+                    </Link>
+                </div>
+            )}
         </nav>
     )
 }
