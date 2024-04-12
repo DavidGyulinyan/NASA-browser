@@ -1,0 +1,22 @@
+export interface NewPlanetTypes{
+    titleKey: string,
+    planetName: string,
+    galaxyName: string,
+    diameter: string,
+    distance: string,
+    yourName: string,
+    yourEmail: string,
+    submitTitle: string,
+    reqPlanetName: string,
+    planetNameChar: string,
+    reqGalaxyName: string,
+    reqDiameter: string,
+    planetDiameterChar: string,
+    reqDistance: string,
+    planetDistanceChar: string,
+    reqUserName: string,
+    reqUserEmail: string,
+    userEmailChar: string,
+    selectGalaxy: string,
+    somewhereElse: string
+}
