@@ -23,7 +23,7 @@ const NavBar = () => {
     ];
 
     return (
-        <nav className="w-full mt-3 flex justify-around items-center gap-5 max-lg:flex-wrap bg-blue-800">
+        <nav className="w-full min-h-20 mt-3 flex justify-around items-center gap-5 max-lg:flex-wrap bg-blue-800">
             {navItems.map(item =>
                 <div className="text-white text-center font-bold text-3xl max-xl:text-xl cursor-pointer" key={item.id}>
                     <Link to={item.path}>
