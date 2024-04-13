@@ -2,4 +2,19 @@
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+    border: 1px solid red;
+}
+
+/* CSS */
+.responsive-table th,
+.responsive-table td {
+    white-space: nowrap; /* Prevent line breaks */
+}
+
+@media screen and (max-width: 768px) {
+    /* Adjust table cell width for smaller screens */
+    .responsive-table th,
+    .responsive-table td {
+        min-width: 100px; /* Or adjust as needed */
+    }
 }

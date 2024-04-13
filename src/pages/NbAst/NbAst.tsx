@@ -6,14 +6,13 @@ import { useTranslation } from "react-i18next";
 import { NbastType } from "../../Models/NbastType";
 
 const NbAst = () => {
-
     const { t } = useTranslation();
     const nbastTitles: NbastType = {
         titleKey: "nearbastTitle",
         subTitleKey: "nearbastSubtitle",
         startDateString: "startDate",
         endDateString: "endDate",
-        nearbastSubtitle:"nearbastSubtitle",
+        nearbastSubtitle: "nearbastSubtitle",
         asteroidName: "asteroidName",
         asteroidDistance: "asteroidDistance",
         asteroidMagnitude: "asteroidMagnitude",
@@ -25,7 +24,6 @@ const NbAst = () => {
     const [startDate, setStartDate] = useState<string>('');
     const [endDate, setEndDate] = useState<string>('');
     const [asteroids, setAsteroids] = useState<NearEarthObjects | null>(null);
-
 
     useEffect(() => {
         const date = new Date();
@@ -80,16 +78,8 @@ const NbAst = () => {
         <>
             <div className="mt-20 container mx-auto">
                 <div className="flex flex-col justify-center items-center">
-                    <span className="text-2xl mb-4">
-                        {
-                            t(nbastTitles.titleKey)
-                        }
-                    </span>
-                    <span className="text-xl mb-4">
-                        {
-                            t(nbastTitles.subTitleKey)
-                        }
-                    </span>
+                    <span className="text-2xl mb-4">{t(nbastTitles.titleKey)}</span>
+                    <span className="text-xl mb-4">{t(nbastTitles.subTitleKey)}</span>
                 </div>
 
                 <form className="mb-4 flex justify-center items-center gap-3">
@@ -115,41 +105,43 @@ const NbAst = () => {
                     />
                 </form>
 
+                <div className="table-container overflow-x-auto">
                 <table className={`table-auto w-full ${!asteroids ? "flex flex-col justify-center items-center" : ""}`}>
-                    <thead>
-                        <tr className="bg-gray-200">
-                            <th className="px-4 py-2">{t(nbastTitles.asteroidName)}</th>
-                            <th className="px-4 py-2">{t(nbastTitles.asteroidDistance)}</th>
-                            <th className="px-4 py-2">{t(nbastTitles.asteroidMagnitude)}</th>
-                            <th className="px-4 py-2">{t(nbastTitles.asteroidDiameter)}</th>
-                            <th className="px-4 py-2">{t(nbastTitles.asteroidHazardness)}</th>
-                        </tr>
-                    </thead>
-                    {asteroids
-                        ? <tbody>
-                            {asteroids &&
-                                Object.keys(asteroids).map((date: string) =>
-                                    asteroids[date].map((asteroid: Asteroid) => (
-                                        <tr key={asteroid.id}>
-                                            <td className="border px-4 py-2 text-center">{asteroid.name}</td>
-                                            <td className="border px-4 py-2 text-center">{asteroid.close_approach_data[0].miss_distance.kilometers}</td>
-                                            <td className="border px-4 py-2 text-center">{asteroid.absolute_magnitude_h}</td>
-                                            <td className="border px-4 py-2 text-center">
-                                                {asteroid.estimated_diameter.kilometers.estimated_diameter_min.toFixed(2)} -{" "}
-                                                {asteroid.estimated_diameter.kilometers.estimated_diameter_max.toFixed(2)}
-                                            </td>
-                                            <td className="border px-4 py-2 text-center">{asteroid.is_potentially_hazardous_asteroid ? "Yes" : "No"}</td>
-                                        </tr>
-                                    ))
-                                )
-                            }
+                        <thead>
+                            <tr className="bg-gray-200">
+                                <th className="px-4 py-2">{t(nbastTitles.asteroidName)}</th>
+                                <th className="px-4 py-2">{t(nbastTitles.asteroidDistance)}</th>
+                                <th className="px-4 py-2">{t(nbastTitles.asteroidMagnitude)}</th>
+                                <th className="px-4 py-2">{t(nbastTitles.asteroidDiameter)}</th>
+                                <th className="px-4 py-2">{t(nbastTitles.asteroidHazardness)}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {asteroids ? (
+                                <>
+                                    {Object.keys(asteroids).map((date: string) =>
+                                        asteroids[date].map((asteroid: Asteroid) => (
+                                            <tr key={asteroid.id}>
+                                                <td className="border px-4 py-2 text-center">{asteroid.name}</td>
+                                                <td className="border px-4 py-2 text-center">{asteroid.close_approach_data[0].miss_distance.kilometers}</td>
+                                                <td className="border px-4 py-2 text-center">{asteroid.absolute_magnitude_h}</td>
+                                                <td className="border px-4 py-2 text-center">
+                                                    {asteroid.estimated_diameter.kilometers.estimated_diameter_min.toFixed(2)} -{" "}
+                                                    {asteroid.estimated_diameter.kilometers.estimated_diameter_max.toFixed(2)}
+                                                </td>
+                                                <td className="border px-4 py-2 text-center">{asteroid.is_potentially_hazardous_asteroid ? "Yes" : "No"}</td>
+                                            </tr>
+                                        ))
+                                    )}
+                                </>
+                            ) : (
+                                <tr>
+                                    <td className="text-2xl text-red-600 text-center" colSpan={5}> Wait for data or check your network connection</td>
+                                </tr>
+                            )}
                         </tbody>
-                        :
-                        <tbody className="w-full py-3 flex justify-center items-center">
-                            <span className="text-2xl text-red-600 text-center">Wait for data or check your network connection</span>
-                        </tbody>
-                    }
-                </table>
+                    </table>
+                </div>
             </div>
         </>
     );

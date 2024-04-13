@@ -67,7 +67,7 @@ const Apod = () => {
                             }
                         </p>
                     </div>
-                    <img className="h-[58rem]" src={photo} alt="Astronomy photo of the day" />
+                    <img className="h-[58rem] object-contain" src={photo} alt="Astronomy photo of the day" />
                 </div>
                 :
                 <div className="w-full flex flex-col justify-center items-center gap-2 py-3">
